@@ -49,7 +49,7 @@ String ret=NowPaySdk.getToken(sdkId,appKey);
 > String currencyType = "BAIC";                       //币种
 > String orderNo = "12121212";                        //自己系统中的订单号
 >
->NowPaySdk.getPorder(sdkId,orderAmount,orderNo,currencyType,token);
+> NowPaySdk.getPorder(sdkId,orderAmount,orderNo,currencyType,token);
 >```
 >响应示例：
 >
@@ -154,7 +154,7 @@ String ret=NowPaySdk.getToken(sdkId,appKey);
 >    String token = "1252002bd3ff4a418b24b331cd28b0c4";     //token
 >    String sdkId = sdkId;                                  //自己的sdkId
 >    String transactionNo = "1808223643283327367154";       //交易号
->String ret=NowPaySdk.selectOrderByNo(transactionNo,sdkId,token);
+>    String ret=NowPaySdk.selectOrderByNo(transactionNo,sdkId,token);
 >```
 >响应示例：
 >```json
