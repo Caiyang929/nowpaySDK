@@ -24,6 +24,12 @@ String ret=NowPaySdk.getToken(sdkId,appKey);
 >```java
 >NowPaySdk.getToken(sdkId,appKey);
 >```
+>请求参数：
+>
+>|参数|参数类型|参数说明|
+>|:---:|:---:|:---:|
+>|sdkId|String(36)|sdkId|
+>|appKey|String(32)|appKey|
 >响应示例：
 >
 >```json
@@ -35,9 +41,9 @@ String ret=NowPaySdk.getToken(sdkId,appKey);
 >```
 >|参数|参数类型|参数说明|
 >|:---:|:---:|:---:|
->|success|String|是否校验成功:true成功;false不成功|
->|message|String|相应信息|
->|token|String|Token|
+>|success|Boolean|是否校验成功:true成功;false不成功|
+>|message|String(20)|相应信息|
+>|token|String(32)|Token|
 
 >###    2.获取Porder
 >
@@ -51,6 +57,15 @@ String ret=NowPaySdk.getToken(sdkId,appKey);
 >
 > NowPaySdk.getPorder(sdkId,orderAmount,orderNo,currencyType,token);
 >```
+>请求参数：
+>
+>|参数|参数类型|参数说明|
+>|:---:|:---:|:---:|
+>|sdkId|String(36)|sdkId|
+>|token|String(32)|token|
+>|orderAmount|String(100)|交易金额|
+>|orderNo|String|订单号|
+>|currencyType|String(20)|币种|
 >响应示例：
 >
 >```json
@@ -72,6 +87,15 @@ String ret=NowPaySdk.getToken(sdkId,appKey);
 >    String merchantId= "asdasdasdasdasd";                   //商户ID
 >    String ret=NowPaySdk.selectOrderByTime(merchantId,beginTime,endTime,token,sdkId)
 >```
+>请求参数：
+>
+>|参数|参数类型|参数说明|
+>|:---:|:---:|:---:|
+>|sdkId|String(36)|sdkId|
+>|token|String(32)|token|
+>|merchantId|String(100)|交易金额|
+>|beginTime|Long(13-18)|开始时间|
+>|endTime|Long(13-18)|截止时间|
 >响应示例：
 >
 >```json
@@ -104,21 +128,21 @@ String ret=NowPaySdk.getToken(sdkId,appKey);
 >```
 >|参数|参数类型|参数说明|
 >|:---:|:---:|:---:|
->|currencyType|String|币种|
->|orderAmount|String|交易金额|
->|walletAccount|String|钱包账号|
->|transactionNo|String|交易号|
+>|currencyType|String(20)|币种|
+>|orderAmount|String(100)|交易金额|
+>|walletAccount|String(32)|钱包账号|
+>|transactionNo|String(22)|交易号|
 >|transactionTime|Date|交易时间|
->|verifyFailureReasons|String|参数校验失败原因|
->|isSuccess|Int|是否成功|
+>|verifyFailureReasons|String(100)|参数校验失败原因|
+>|isSuccess|Int(1)|是否成功|
 >|refundList的数据结构：|---|---|
->|refundAmount|BigDecimal|退款金额|
->|currencyType|String|币种|
->|isSuccess|Int|是否操作成功|
->|refundNo|String|退款流水号|
+>|refundAmount|BigDecimal(32)|退款金额|
+>|currencyType|String(20)|币种|
+>|isSuccess|Int(1)|是否操作成功|
+>|refundNo|String(22)|退款流水号|
 >|refundTime|Date|退款时间|
->|operator|String|操作人|
->|transactionType|Byte|交易类型:0:购买,1:退货|
+>|operator|String(100)|操作人|
+>|transactionType|Byte(1)|交易类型:0:购买,1:退货|
 
 >###    4.查询订单根据页数
 >```java
@@ -128,7 +152,14 @@ String ret=NowPaySdk.getToken(sdkId,appKey);
 >    int page = 1;                                          //结束时间
 >    String ret=NowPaySdk.selectOrderByPage(page,limit,token,sdkId);
 >```
->
+>请求参数：
+ >
+ >|参数|参数类型|参数说明|
+ >|:---:|:---:|:---:|
+ >|sdkId|String(36)|sdkId|
+ >|token|String(32)|token|
+ >|page|String(16)|页数|
+ >|limit|String(4)|单页限制数据|
 >响应示例：
 >```json
 >{
@@ -147,6 +178,18 @@ String ret=NowPaySdk.getToken(sdkId,appKey);
 >    "message": "查詢成功!"
 >}
 >```
+>返回数据：
+
+>|参数|参数类型|参数说明|
+>|:---:|:---:|:---:|
+>|currencyType|String(20)|币种|
+>|orderAmount|String(100)|交易金额|
+>|walletAccount|String(32)|钱包账号|
+>|transactionNo|String(22)|交易号|
+>|transactionTime|Date|交易时间|
+>|verifyFailureReasons|String(100)|参数校验失败原因|
+>|isSuccess|Int(1)|是否成功|
+
 
 >###    5.查询订单根据交易号
 >```java
@@ -156,6 +199,13 @@ String ret=NowPaySdk.getToken(sdkId,appKey);
 >    String transactionNo = "1808223643283327367154";       //交易号
 >    String ret=NowPaySdk.selectOrderByNo(transactionNo,sdkId,token);
 >```
+>请求参数：
+ >
+ >|参数|参数类型|参数说明|
+ >|:---:|:---:|:---:|
+ >|sdkId|String(36)|sdkId|
+ >|token|String(32)|token|
+>|transactionNo|String(22)|交易号|
 >响应示例：
 >```json
 >{
@@ -180,17 +230,17 @@ String ret=NowPaySdk.getToken(sdkId,appKey);
 >|参数|参数类型|参数说明|
 >|:---:|:---:|:---:|
 >|orderNo|String|订单号|
->|transactionNo|String|交易号|
+>|transactionNo|String(22)|交易号|
 >|transactionTime|Date|订单时间|
->|walletAccount|String|钱包账号|
->|orderAmount|BigDecimal|订单金额|
->|merchantName|String|商户名字|
->|currencyType|String|币种|
->|operator|String|操作人|
->|isSuccess|Byte|是否操作成功|
->|varifyFailureReasons|String|参数校验失败原因|
+>|walletAccount|String(32)|钱包账号|
+>|orderAmount|BigDecimal(32)|订单金额|
+>|merchantName|String(100)|商户名字|
+>|currencyType|String(20)|币种|
+>|operator|String(100)|操作人|
+>|isSuccess|Byte(1)|是否操作成功|
+>|varifyFailureReasons|String(100)|参数校验失败原因|
 >|isRefund|boolean|是否退款|
->|refundAmount|BigDecimal|退款金额|
+>|refundAmount|BigDecimal(100)|退款金额|
 
 
 >###    6.查询退款根据交易号
