@@ -1,4 +1,4 @@
-package com.baic.sdk;
+import com.baic.sdk.NowPaySdk;
 
 public class Test {
     public static void main(String[] args) {

@@ -3,10 +3,8 @@
 
 <p align="center">基于Baic NowPay的 java 简单组件。</p>
 
-## 安装
-
-```xml
-$ composer require baic-project/nowpay-sdk -vvv
+## 安装（即将上线）
+```
 ```
 ## 配置
 
@@ -14,19 +12,17 @@ $ composer require baic-project/nowpay-sdk -vvv
 
 ## 使用
 
-```php
-use BaicProject\NowPaySDK\Baic;
-
-$sdkId = 'Your sdkId';
-$appKey = 'Your appKey';
-
-$baic = new Baic($sdkId, $appKey);
+```java
+import com.baic.sdk.NowPaySdk;
+String sdkId = "Your sdkId";
+String appKey = "Your appKey";
+String ret=NowPaySdk.getToken(sdkId,appKey);
 ```
 
 >###    1.获取Token
 >
->```php
->$response = $baic->getToken();
+>```java
+>NowPaySdk.getToken(sdkId,appKey);
 >```
 >响应示例：
 >
@@ -45,15 +41,15 @@ $baic = new Baic($sdkId, $appKey);
 
 >###    2.获取Porder
 >
->```php
->$data = [
->    'token' => '1252002bd3ff4a418b24b331cd28b0c4',  //获取的token
->    'sdkId' => $sdkId,                              //自己的sdkId
->    'orderAmount' => 10,                            //单位
->    'currencyType' => 'BAIC',                       //币种
->    'orderNo' => '12121212',                        //自己系统中的订单号
->];
->$response = $baic->getPorder($data);
+>```java
+>
+> String token = "1252002bd3ff4a418b24b331cd28b0c4";  //获取的token
+> String sdkId = sdkId;                               //自己的sdkId
+> String orderAmount = 10;                            //单位
+> String currencyType = "BAIC";                       //币种
+> String orderNo = "12121212";                        //自己系统中的订单号
+>
+>NowPaySdk.getPorder(sdkId,orderAmount,orderNo,currencyType,token);
 >```
 >响应示例：
 >
@@ -68,15 +64,13 @@ $baic = new Baic($sdkId, $appKey);
 拿到porder后生成二维码，然后钱包APP扫码进行后续操作
 
 >###    3.查询订单根据时间
->```php
->$data = [
->    'token' => '1252002bd3ff4a418b24b331cd28b0c4',      //token
->    'sdkId' => $sdkId,                                  //自己的sdkId
->    'beginTime' => '1534038254774',                     //开始时间
->    'endTime' => '1534239254774',                       //结束时间
->    'merchantId' => 'asdasdasdasdasd',                  //商户ID
->];
->$response = $baic->selectOrderByTime($data);
+>```java
+>    String token = "1252002bd3ff4a418b24b331cd28b0c4";      //token
+>    String sdkId = "sdkId";                                 //自己的sdkId
+>    String beginTime = "1534038254774";                     //开始时间
+>    String endTime = "1534239254774";                       //结束时间
+>    String merchantId= "asdasdasdasdasd";                   //商户ID
+>    String ret=NowPaySdk.selectOrderByTime(merchantId,beginTime,endTime,token,sdkId)
 >```
 >响应示例：
 >
@@ -127,14 +121,12 @@ $baic = new Baic($sdkId, $appKey);
 >|transactionType|Byte|交易类型:0:购买,1:退货|
 
 >###    4.查询订单根据页数
->```php
->$data = [
->    'token' => '1252002bd3ff4a418b24b331cd28b0c4',      //token
->    'sdkId' => $sdkId,                                  //自己的sdkId
->    'limit' => 10,                                      //开始时间
->    'page' => 1,                                        //结束时间
->];
->$response = $baic->selectOrderByPage($data);
+>```java
+>    String token = "1252002bd3ff4a418b24b331cd28b0c4";     //token
+>    String sdkId = sdkId;                                  //自己的sdkId
+>    int limit = 10;                                        //开始时间
+>    int page = 1;                                          //结束时间
+>    String ret=NowPaySdk.selectOrderByPage(page,limit,token,sdkId);
 >```
 >
 >响应示例：
@@ -157,13 +149,12 @@ $baic = new Baic($sdkId, $appKey);
 >```
 
 >###    5.查询订单根据交易号
->```php
->$data = [
->    'token' => '1252002bd3ff4a418b24b331cd28b0c4',      //token
->    'sdkId' => $sdkId,                                  //自己的sdkId
->    'transactionNo' => '1808223643283327367154',        //交易号
->];
->$response = $baic->selectByTransactionNo($data);
+>```java
+>
+>    String token = "1252002bd3ff4a418b24b331cd28b0c4";     //token
+>    String sdkId = sdkId;                                  //自己的sdkId
+>    String transactionNo = "1808223643283327367154";       //交易号
+>String ret=NowPaySdk.selectOrderByNo(transactionNo,sdkId,token);
 >```
 >响应示例：
 >```json
@@ -203,13 +194,12 @@ $baic = new Baic($sdkId, $appKey);
 
 
 >###    6.查询退款根据交易号
->```php
->$data = [
->    'token' => '1252002bd3ff4a418b24b331cd28b0c4',      //token
->    'sdkId' => $sdkId,                                  //自己的sdkId
->    'transactionNo' => '1808223225350327327962',        //交易号
->];
->$response = $baic->selectRefundByTransactionNo($data);
+>```java
+>
+>    String token = "1252002bd3ff4a418b24b331cd28b0c4";     //token
+>    String sdkId = sdkId;                                  //自己的sdkId
+>    String transactionNo = "1808223643283327367154";       //交易号
+>    String ret=NowPaySdk.selectRefundByTransactionNo(transactionNo,sdkId,token);
 >```
 >响应示例：
 >```json
@@ -234,14 +224,12 @@ $baic = new Baic($sdkId, $appKey);
 >```
 
 >###    7.查询退款根据页数
->```php
->$data = [
->    'token' => '1252002bd3ff4a418b24b331cd28b0c4',      //token
->    'sdkId' => $sdkId,                                  //自己的sdkId
->    'limit' => 1,                                       //一页几个
->    'page' => 1,                                        //第几页
->];
->$response = $baic->selectRefundRecordByPage($data);
+>```java
+>    String token = "1252002bd3ff4a418b24b331cd28b0c4";     //token
+>    String sdkId = sdkId;                                  //自己的sdkId
+>    int limit = 1;                                      //一页几个
+>    int page = 1;                                        //第几页
+>    String ret=NowPaySdk.selectRefundRecordByPage(page,limit,sdkId,token);
 >```
 >响应示例：
 >```json
@@ -265,15 +253,13 @@ $baic = new Baic($sdkId, $appKey);
 >```
 
 >###    8.退款操作
->```php
->$data = [
->    'token' => '1252002bd3ff4a418b24b331cd28b0c4',      //token
->    'sdkId' => $sdkId,                                  //自己的sdkId
->    'merchantId' => 'asdasdasdasdasd',                  //商户ID
->    'transactionNo' => '1808223225350327327962',        //交易号
->    'refundAmount' => 0.001,                            //退款金额
->];
->$response = $baic->sdkRefundRequest($data);
+>```java
+>    String token = "1252002bd3ff4a418b24b331cd28b0c4";     //token
+>    String sdkId = sdkId;                                  //自己的sdkId
+>    String merchantId = "asdasdasdasdasd";                  //商户ID
+>    String transactionNo = "1808223225350327327962";        //交易号
+>    String refundAmount = "0.001";                            //退款金额
+>    String ret=NowPaySdk.refundRequest(refundAmount, merchantId, transactionNo, sdkId, token);
 >```
 >响应示例：
 >```json
